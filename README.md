@@ -18,6 +18,6 @@ A login page for Audible
 
 ### Features:
 
-* Images pagination
+* Paging images
 * Next & skip button
 * Login page
