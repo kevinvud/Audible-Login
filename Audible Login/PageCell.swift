@@ -17,9 +17,9 @@ class PageCell: UICollectionViewCell {
             }
             
             var imageName = page.imageName
-            if UIDevice.current.orientation.isLandscape {
-                imageName += "_landscape"
-            }
+//            if UIDevice.current.orientation.isLandscape {
+//                imageName += "_landscape"
+//            }
              imageView.image = UIImage(named: imageName)
             let color = UIColor(white: 0.2, alpha: 1)
             

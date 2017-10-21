@@ -52,29 +52,32 @@ class ViewController: UIViewController {
         return pc
     }()
     
-    let skipButton: UIButton = {
+    lazy var skipButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Skip", for: .normal)
-        button.backgroundColor = UIColor.brown
+        button.backgroundColor = UIColor.orange
         button.tintColor = UIColor.white
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 15
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(skip), for: .touchUpInside)
         return button
     }()
     
-    let nextButton: UIButton = {
+    lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Next", for: .normal)
-        button.backgroundColor = UIColor.brown
+        button.backgroundColor = UIColor.orange
         button.tintColor = UIColor.white
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 15
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(nextPage), for: .touchUpInside)
         return button
     }()
     
     var pageControlBottomAnchor: NSLayoutConstraint?
     var skipButtonTopAnchor: NSLayoutConstraint?
     var nextButtonTopAnchor: NSLayoutConstraint?
+    var collectionViewBottomAnchor: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +87,8 @@ class ViewController: UIViewController {
         view.addSubview(nextButton)
         
         collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        collectionViewBottomAnchor = collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        collectionViewBottomAnchor?.isActive = true
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
@@ -108,12 +112,84 @@ class ViewController: UIViewController {
         
         registerCells()
         
+        observeKeyboardNotification()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(keyboardDismissed))
+        view.addGestureRecognizer(tap)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    @objc func keyboardDismissed(){
+        view.endEditing(true)
         
     }
     
+    @objc func nextPage(){
+        if pageControl.currentPage == pages.count{
+            return
+        }
+        if pageControl.currentPage == pages.count - 1{
+                moveControlContraintsOffScreen()
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
+        let indexPath = IndexPath(item: pageControl.currentPage + 1, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        pageControl.currentPage += 1
+    }
+    
+    @objc func skip(){
+        
+        let indexPath = IndexPath(item: pages.count, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        moveControlContraintsOffScreen()
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        
+    }
+    
+    func moveControlContraintsOffScreen(){
+        pageControlBottomAnchor?.constant = 40
+        nextButtonTopAnchor?.constant = -100
+        skipButtonTopAnchor?.constant = -100
+    }
+    
+    func observeKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc func keyboardShow(){
+        
+        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.view.frame = CGRect(x: 0, y: -60, width: self.view.frame.width, height: self.view.frame.height)
+        }, completion: nil)
+
+    }
+
+    @objc func keyboardHide(){
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        }, completion: nil)
+        
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+    }
+    
+    
     private func registerCells(){
         collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: loginCellId)
+        collectionView.register(LoginCell.self, forCellWithReuseIdentifier: loginCellId)
 
     }
     
@@ -122,17 +198,17 @@ class ViewController: UIViewController {
         pageControl.currentPage = pageNumber
         
         if pageNumber == pages.count{
-            pageControlBottomAnchor?.constant = 40
-            nextButtonTopAnchor?.constant = -100
-            skipButtonTopAnchor?.constant = -100
+            moveControlContraintsOffScreen()
         }else{
             pageControlBottomAnchor?.constant = -10
             nextButtonTopAnchor?.constant = 50
             skipButtonTopAnchor?.constant = 50
         }
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
+        
     }
 
 }

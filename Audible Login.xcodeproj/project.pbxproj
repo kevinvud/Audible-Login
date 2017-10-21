@@ -14,6 +14,7 @@
 		D1127E331F9AF49100A8C489 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1127E311F9AF49100A8C489 /* LaunchScreen.storyboard */; };
 		D1127E3B1F9AF91200A8C489 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1127E3A1F9AF91200A8C489 /* PageCell.swift */; };
 		D1127E3D1F9B02E400A8C489 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1127E3C1F9B02E400A8C489 /* Page.swift */; };
+		D1127E3F1F9B3EE300A8C489 /* LoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1127E3E1F9B3EE300A8C489 /* LoginCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		D1127E341F9AF49100A8C489 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D1127E3A1F9AF91200A8C489 /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
 		D1127E3C1F9B02E400A8C489 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		D1127E3E1F9B3EE300A8C489 /* LoginCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				D1127E2A1F9AF49100A8C489 /* ViewController.swift */,
 				D1127E3A1F9AF91200A8C489 /* PageCell.swift */,
 				D1127E3C1F9B02E400A8C489 /* Page.swift */,
+				D1127E3E1F9B3EE300A8C489 /* LoginCell.swift */,
 				D1127E2C1F9AF49100A8C489 /* Main.storyboard */,
 				D1127E2F1F9AF49100A8C489 /* Assets.xcassets */,
 				D1127E311F9AF49100A8C489 /* LaunchScreen.storyboard */,
@@ -144,6 +147,7 @@
 			files = (
 				D1127E2B1F9AF49100A8C489 /* ViewController.swift in Sources */,
 				D1127E291F9AF49100A8C489 /* AppDelegate.swift in Sources */,
+				D1127E3F1F9B3EE300A8C489 /* LoginCell.swift in Sources */,
 				D1127E3D1F9B02E400A8C489 /* Page.swift in Sources */,
 				D1127E3B1F9AF91200A8C489 /* PageCell.swift in Sources */,
 			);
