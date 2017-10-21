@@ -69,6 +69,8 @@ class PageCell: UICollectionViewCell {
 
     }()
     
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -84,6 +86,7 @@ class PageCell: UICollectionViewCell {
         addSubview(imageView)
         addSubview(textView)
         addSubview(lineSeparator)
+
         
         imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         imageView.bottomAnchor.constraint(equalTo: textView.topAnchor).isActive = true
@@ -100,7 +103,7 @@ class PageCell: UICollectionViewCell {
         lineSeparator.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         lineSeparator.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
-        
+
         
     }
     
