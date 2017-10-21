@@ -60,17 +60,41 @@
 		D1127E271F9AF49100A8C489 /* Audible Login */ = {
 			isa = PBXGroup;
 			children = (
+				D1127E621F9B8C1F00A8C489 /* Controller */,
+				D1127E611F9B8C0A00A8C489 /* View */,
+				D1127E601F9B8C0300A8C489 /* Model */,
 				D1127E281F9AF49100A8C489 /* AppDelegate.swift */,
-				D1127E2A1F9AF49100A8C489 /* ViewController.swift */,
-				D1127E3A1F9AF91200A8C489 /* PageCell.swift */,
-				D1127E3C1F9B02E400A8C489 /* Page.swift */,
-				D1127E3E1F9B3EE300A8C489 /* LoginCell.swift */,
 				D1127E2C1F9AF49100A8C489 /* Main.storyboard */,
 				D1127E2F1F9AF49100A8C489 /* Assets.xcassets */,
 				D1127E311F9AF49100A8C489 /* LaunchScreen.storyboard */,
 				D1127E341F9AF49100A8C489 /* Info.plist */,
 			);
 			path = "Audible Login";
+			sourceTree = "<group>";
+		};
+		D1127E601F9B8C0300A8C489 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D1127E3C1F9B02E400A8C489 /* Page.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D1127E611F9B8C0A00A8C489 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D1127E3A1F9AF91200A8C489 /* PageCell.swift */,
+				D1127E3E1F9B3EE300A8C489 /* LoginCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D1127E621F9B8C1F00A8C489 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D1127E2A1F9AF49100A8C489 /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
